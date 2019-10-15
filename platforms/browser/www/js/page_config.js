@@ -1,5 +1,5 @@
 function errorDB(err) { alert("Error processing SQL: "+ err.code + " " + err.message); }
-function successDB() {}
+function successDB() { alert('Success'); }
 
 function errorFile(err) { alert("FileSystem Error: " + err); }
 
@@ -108,19 +108,25 @@ var app = {
     readFromFile: function() {
 
     window.resolveLocalFileSystemURL(cordova.file.externalDataDirectory, function(dir) {
+          alert('1');
           dir.getFile("enWords.txt", {create:true}, function(file) {
+            alert('2');
             enWordsFile = file;
             app.readFromFileToDb();
+            alert('3');
           });
         }); 
         
     }, // end readFromFile
     
     readFromFileToDb: function() {
-
-    enWordsFile.file(function(file) {
+      alert('4');
+      enWordsFile.file(function(file) {
+        alert('5');
         var reader = new FileReader();
+        alert('6');
         reader.onloadend = function(e) {
+          alert('7');
           var value = this.result.trim();
           var lines = value.split("\n");
           
