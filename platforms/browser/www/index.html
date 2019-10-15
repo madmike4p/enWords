@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="msapplication-tap-highlight" content="no" />
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+  <meta http-equiv="Content-Security-Policy" content="default-src *; connect-src *; style-src 'self' 'unsafe-inline'; media-src *">
+  <link rel="stylesheet" type="text/css" href="css/index.css" />
+  <script src="mobile/jquery-2.2.4.min.js"></script>
+	<link rel="stylesheet" href="mobile/jquery.mobile-1.4.5.min.css" />
+  <script src="mobile/jquery.mobile-1.4.5.min.js"></script>
+  <title>Hello World</title>
+</head>
+
+<body>
+  <div data-role="page">
+    <div data-role="header">
+      <a href="index.html" data-icon="home">Start</a>
+      <h1>Ustawienia</h1>
+    </div><!-- /header -->
+	
+    <div role="main" style="ui-content">
+      
+      <div class="ui-grid-a">
+        <div class="ui-block-a">
+          <div class="ui-bar" style="">
+            <button class="ui-btn ui-btn-b ui-icon-shop ui-btn-icon-left" id="updateAndClearDbBtn">Create database and update it</button>
+          </div>
+        </div>
+     
+        <div class="ui-block-b">
+          <div class="ui-bar ui-bar-a" style="" id="divMsg">
+            Block B
+          </div>
+        </div>
+      </div><!-- .ui-grid-a -->
+  
+    </div>
+  </div>
+  
+  <script type="text/javascript" src="cordova.js"></script>
+  <script type="text/javascript" src="js/app_common.js"></script>
+  <script type="text/javascript" src="js/page_config.js"></script>
+  <script type="text/javascript">
+    app.initialize();
+    //alert(document.getElementById("updateAndClearDbBtn"));
+  </script>
+</body>
+
+</html>
