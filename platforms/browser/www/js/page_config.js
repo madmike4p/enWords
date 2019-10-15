@@ -93,15 +93,34 @@ var app = {
     onDeviceReady: function() {
       app.receivedEvent('deviceready');
       db.transaction(createDB, errorDB, successDB);
-      document.getElementById("updateAndClearDbBtn").addEventListener('click', app.updateAndClearDb, false);
-
       
+      document.getElementById("updateAndClearDbBtn").addEventListener('click', app.updateAndClearDb, false);
+      $("#updateAndClearDbBtnBox").click(function () {
+        if ( $(this).prop("checked") == true ) {
+          $('#updateAndClearDbBtn').removeAttr("disabled");
+        } else {
+          $('#updateAndClearDbBtn').attr("disabled", "");
+        }
+      });
+
+      document.getElementById("updateDbBtn").addEventListener('click', app.updateDb, false);
+      $("#updateDbBtnBox").click(function () {
+        if ( $(this).prop("checked") == true ) {
+          $('#updateDbBtn').removeAttr("disabled");
+        } else {
+          $('#updateDbBtn').attr("disabled", "");
+        }
+      });
 
 	
     }, // end onDeviceReady
 
     updateAndClearDb: function() {
       db.transaction(clearDB, errorDB, successDB);
+      app.readFromFile();
+    },
+    
+    updateDb: function() {
       app.readFromFile();
     },
     

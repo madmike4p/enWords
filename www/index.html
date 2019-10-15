@@ -26,7 +26,22 @@
       <div class="ui-grid-a">
         <div class="ui-block-a">
           <div class="ui-bar" style="">
-            <button class="ui-btn ui-btn-b ui-icon-shop ui-btn-icon-left" id="updateAndClearDbBtn">Create database and update it</button>
+            <button class="ui-btn ui-btn-b ui-icon-shop ui-btn-icon-left" id="updateAndClearDbBtn" disabled="">Clear db and update from file</button>
+            <form>
+              <input type="checkbox" name="updateAndClearDbBtnBox" id="updateAndClearDbBtnBox" data-mini="true">
+              <label for="updateAndClearDbBtnBox">I agree to clear db and update from file</label>
+            </form>
+            <button class="ui-btn ui-btn-b ui-icon-shop ui-btn-icon-left" id="updateDbBtn" disabled="">Update db from file</button>
+            <form>
+              <input type="checkbox" name="updateDbBtnBox" id="updateDbBtnBox" data-mini="true">
+              <label for="updateDbBtnBox">I agree to update db from file</label>
+            </form>
+            <button class="ui-btn ui-btn-b ui-icon-shop ui-btn-icon-left" id="saveDbBtn" disabled="">Save from db to file</button>
+            <form>
+              <input type="checkbox" name="checkbox-mini-0" id="checkbox-mini-2" data-mini="true">
+              <label for="checkbox-mini-2">I agree to save from db to file</label>
+            </form>
+            
           </div>
         </div>
      
