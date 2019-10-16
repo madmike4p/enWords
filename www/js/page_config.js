@@ -5,15 +5,7 @@ function errorFile(err) { alert("FileSystem Error: " + err); }
 
 function createDB(tx){
   var createSQL;
-  createSQL  = 'create table if not exists words(';
-  createSQL += 'id integer primary key,';
-  createSQL += 'gb_word text not null,';
-  createSQL += 'us_word text default "",';
-  createSQL += 'ph_word text default "",';
-  createSQL += 'ir_word text default "",';
-  createSQL += 'pl_word text not null,';
-  createSQL += 'notes text default ""';
-  createSQL += ');';
+  createSQL  = 'create table if not exists words(id integer primary key, gb_word text not null, us_word text default "", ph_word text default "", ir_word text default "", pl_word text not null, rate integer default 0,notes text default "", added text default "", unique(gb_word, pl_word) on conflict ignore)';
   tx.executeSql(createSQL);
   
   createSQL  = 'create table if not exists test(';
@@ -35,7 +27,7 @@ function clearDB(tx){
 
 function insertRecord(param) {
   return function (tx) {
-    var insertSQL = 'insert into words (gb_word, us_word, ph_word, ir_word, pl_word, notes) values (?, ?, ?, ?, ?, ?)';
+    var insertSQL = 'insert into words (gb_word, us_word, ph_word, ir_word, pl_word, notes, rate, added) values (?, ?, ?, ?, ?, ?, ?, ?)';
     tx.executeSql(insertSQL, param);
   }
 }
@@ -111,6 +103,15 @@ var app = {
           $('#updateDbBtn').attr("disabled", "");
         }
       });
+      
+      document.getElementById("saveAllDbBtn").addEventListener('click', app.saveAllToFile, false);
+      $("#saveAllDbBtnBox").click(function () {
+        if ( $(this).prop("checked") == true ) {
+          $('#saveAllDbBtn').removeAttr("disabled");
+        } else {
+          $('#saveAllDbBtn').attr("disabled", "");
+        }
+      });
 
 	
     }, // end onDeviceReady
@@ -144,7 +145,7 @@ var app = {
           
           for (var x = 0; x < lines.length; x++) {
             var words = lines[x].split("|");
-            if (words.length == 6) db.transaction(insertRecord(words), errorDB, successDB);
+            if (words.length == 8) db.transaction(insertRecord(words), errorDB, successDB);
           }
           
           app.countRecords();
@@ -155,6 +156,16 @@ var app = {
       }, errorFile);
       
     }, // end readFromFileToDb
+    
+    saveAllToFile: function() {
+      window.resolveLocalFileSystemURL(cordova.file.externalDataDirectory, function(dir) {
+          dir.getFile("enWordsDump.txt", {create:true}, function(file) {
+            enWordsFile = file;
+            alert('zapis');
+            //app.readFromFileToDb();
+          });
+        }); 
+    },
     
     countRecords: function (msg) {
       db.transaction(function(tx){
