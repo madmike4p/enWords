@@ -5,7 +5,7 @@ function errorFile(err) { alert("FileSystem Error: " + err); }
 
 function createDB(tx){
   var createSQL;
-  createSQL  = 'create table if not exists words(id integer primary key, gb_word text not null, us_word text default "", ph_word text default "", ir_word text default "", pl_word text not null, rate integer default 0,notes text default "", added text default "", unique(gb_word, pl_word) on conflict ignore)';
+  createSQL  = 'create table if not exists words(id integer primary key, gb_word text not null, us_word text default "", ph_word text default "", ir_word text default "", pl_word text not null, notes text default "",  rate integer default 0, added text default "", inpart integer default 0, unique(gb_word, pl_word) on conflict ignore)';
   tx.executeSql(createSQL);
   
   createSQL  = 'create table if not exists parts (';
@@ -25,7 +25,7 @@ function clearDB(tx){
 function getShuffledRecords(param) {
   db.transaction(function(tx){
     tx.executeSql("delete from parts where 1");
-    tx.executeSql("select id from words", [],function(tx1, result) {	 
+    tx.executeSql("select id from words", [], function(tx1, result) {	 
       var len = result.rows.length;
       var tab = [];
       for (var x = 0; x < len; x++)  {
@@ -41,7 +41,45 @@ function getShuffledRecords(param) {
     }, errorDB);
   }, errorDB, successDB);
 }
- 
+
+function saveAllFromDbToFile(tx) {
+  tx.executeSql("select gb_word, us_word, ph_word, ir_word, pl_word, notes, rate, added from words", [], function(tx1, result) {	 
+
+    if(enWordsFile) {
+      
+      var lines = [];
+      for (var x = 0; x < result.rows.length; x++)  {
+        var tab = [
+          result.rows.item(x).gb_word,
+          result.rows.item(x).us_word,
+          result.rows.item(x).ph_word,
+          result.rows.item(x).ir_word,
+          result.rows.item(x).pl_word,
+          result.rows.item(x).notes,
+          result.rows.item(x).rate,
+          result.rows.item(x).added
+          ];
+          lines.push(tab.join('|'));
+       }
+      
+      
+      
+      
+      enWordsFile.createWriter(function(fileWriter) {
+        fileWriter.write(lines.join("\n"));
+      }, errorFile);
+      
+      
+      
+      
+      
+      
+    }
+  
+  }, errorDB); 
+}
+
+
 function insertRecord(param) {
   return function (tx) {
     var insertSQL = 'insert into words (gb_word, us_word, ph_word, ir_word, pl_word, notes, rate, added) values (?, ?, ?, ?, ?, ?, ?, ?)';
@@ -61,14 +99,14 @@ function shuffle(array) {
     array[index] = temp;
   }
 }
+
 /*
 function writeLog(str) {
-	if(!logOb) return;
-	var log = str + " [" + (new Date()) + "]\n";
-	logOb.createWriter(function(fileWriter) {
+	if(!enWordsFile) return;
+	enWordsFile.createWriter(function(fileWriter) {
 		fileWriter.seek(fileWriter.length);
 		fileWriter.write("some sample text, i moze jeszcze troch, i jeszcze troche");
-	}, fail);
+	}, errorFile);
 }
 
 
@@ -171,13 +209,8 @@ var app = {
     },
     
     dbMessage: function(msg) {
-      
-      //var ul = document.getElementById("list");
-      //var li = document.createElement("li");
-      //li.appendChild(document.createTextNode(msg));
-      //ul.appendChild(li);
       document.getElementById("divMsg").innerHTML = msg;
-    },
+    }, // end dbMessage
     
     prepareParts: function() {
       var value = parseInt($("#preparePartsBtnBox :selected").val());
@@ -201,22 +234,17 @@ var app = {
         reader.onloadend = function(e) {
           var value = this.result.trim();
           var lines = value.split("\n");
-
           _linesCount = lines.length;
           _recordCount = 0;
-          
           for (var x = 0; x < lines.length; x++) {
             var words = lines[x].split("|");
             if (words.length == 8) db.transaction(insertRecord(words), errorDB, successDB);
           }
-          
           app.countRecords();
- 
         };
         
         reader.readAsText(file);
       }, errorFile);
-      
     }, // end readFromFileToDb
     
     saveAllToFile: function() {
@@ -224,11 +252,10 @@ var app = {
       window.resolveLocalFileSystemURL(cordova.file.externalDataDirectory, function(dir) {
           dir.getFile("enWordsDump.txt", {create:true}, function(file) {
             enWordsFile = file;
-            alert('zapis');
-            //app.readFromFileToDb();
+            db.transaction(saveAllFromDbToFile, errorDB, successDB);
           });
         }); 
-    },
+    }, // endsaveAllToFile
     
     countRecords: function (msg) {
       db.transaction(function(tx){
