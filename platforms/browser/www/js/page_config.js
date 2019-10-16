@@ -30,7 +30,7 @@ function insertRecord(param) {
     var insertSQL = 'insert into words (gb_word, us_word, ph_word, ir_word, pl_word, notes, rate, added) values (?, ?, ?, ?, ?, ?, ?, ?)';
     tx.executeSql(insertSQL, param);
     _recordCount += 1 ;
-    if (_recordCount % 10 == 0)  app.dbMessage(_recordCount + "/" + _linesCount);
+    if (_recordCount % 50 == 0)  app.dbMessage("Dodano " + _recordCount + " z " + _linesCount + " rekordow");
   }
 }
 
@@ -185,7 +185,7 @@ var app = {
     countRecords: function (msg) {
       db.transaction(function(tx){
         tx.executeSql("select count(*) as myCount from words", [],function(tx1, result) {	 
-          alert(result.rows.item(0).myCount); 
+          app.dbMessage("Koniec dodawania rekordow, w bazie jest " + result.rows.item(0).myCount + " rekordow");
         }, errorDB);
         }, errorDB, successDB
       );
