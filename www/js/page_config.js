@@ -29,6 +29,8 @@ function insertRecord(param) {
   return function (tx) {
     var insertSQL = 'insert into words (gb_word, us_word, ph_word, ir_word, pl_word, notes, rate, added) values (?, ?, ?, ?, ?, ?, ?, ?)';
     tx.executeSql(insertSQL, param);
+    _recordCount += 1 ;
+    if (_recordCount % 10 == 0)  app.dbMessage(_recordCount + "/" + _linesCount);
   }
 }
 
@@ -72,6 +74,9 @@ function justForTesting() {
 
 var db = window.openDatabase("enWords.db", "1.0", "enWords", 1000000);
 var enWordsFile;
+
+var _linesCount = 0;
+var _recordCount = 0;
 
 var app = {
     initialize: function() {
@@ -149,6 +154,9 @@ var app = {
         reader.onloadend = function(e) {
           var value = this.result.trim();
           var lines = value.split("\n");
+
+          _linesCount = lines.length;
+          _recordCount = 0;
           
           for (var x = 0; x < lines.length; x++) {
             var words = lines[x].split("|");
