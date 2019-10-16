@@ -19,7 +19,7 @@ function createDB(tx){
 
 function clearDB(tx){
   tx.executeSql("delete from words where 1");
-  tx.executeSql("delete from test where 1"); 
+  tx.executeSql("delete from parts where 1"); 
 }
 
 function getShuffledRecords(param) {
@@ -47,7 +47,7 @@ function insertRecord(param) {
     var insertSQL = 'insert into words (gb_word, us_word, ph_word, ir_word, pl_word, notes, rate, added) values (?, ?, ?, ?, ?, ?, ?, ?)';
     tx.executeSql(insertSQL, param);
     _recordCount += 1 ;
-    if (_recordCount % 50 == 0)  app.dbMessage("Dodano " + _recordCount + " z " + _linesCount + " rekordow");
+    if (_recordCount % 50 == 0)  app.dbMessage("Adding: " + _recordCount + " z " + _linesCount);
   }
 }
 
@@ -149,20 +149,34 @@ var app = {
 	
     }, // end onDeviceReady
 
+    disableAll: function() {
+      $('#updateAndClearDbBtn').attr("disabled", "");
+      $('#updateDbBtn').attr("disabled", "");
+      $('#saveAllDbBtn').attr("disabled", "");
+      
+      $("#updateAndClearDbBtnBox").prop('checked', false).checkboxradio("refresh");
+      $("#updateDbBtnBox").prop('checked', false).checkboxradio("refresh");
+      $("#saveAllDbBtnBox").prop('checked', false).checkboxradio("refresh");
+    },
+    
     updateAndClearDb: function() {
+      app.disableAll();
       db.transaction(clearDB, errorDB, successDB);
       app.readFromFile();
     },
     
     updateDb: function() {
+      app.disableAll();
       app.readFromFile();
     },
     
     dbMessage: function(msg) {
-      var ul = document.getElementById("list");
-      var li = document.createElement("li");
-      li.appendChild(document.createTextNode(msg));
-      ul.appendChild(li);
+      
+      //var ul = document.getElementById("list");
+      //var li = document.createElement("li");
+      //li.appendChild(document.createTextNode(msg));
+      //ul.appendChild(li);
+      document.getElementById("divMsg").innerHTML = msg;
     },
     
     prepareParts: function() {
@@ -206,6 +220,7 @@ var app = {
     }, // end readFromFileToDb
     
     saveAllToFile: function() {
+      app.disableAll();
       window.resolveLocalFileSystemURL(cordova.file.externalDataDirectory, function(dir) {
           dir.getFile("enWordsDump.txt", {create:true}, function(file) {
             enWordsFile = file;
@@ -218,7 +233,7 @@ var app = {
     countRecords: function (msg) {
       db.transaction(function(tx){
         tx.executeSql("select count(*) as myCount from words", [],function(tx1, result) {	 
-          app.dbMessage("Koniec dodawania rekordow, w bazie jest " + result.rows.item(0).myCount + " rekordow");
+          app.dbMessage("End, records in db: " + result.rows.item(0).myCount);
         }, errorDB);
         }, errorDB, successDB
       );
