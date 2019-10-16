@@ -21,17 +21,6 @@ function clearDB(tx){
   tx.executeSql("delete from words where 1");
   tx.executeSql("delete from test where 1"); 
 }
-/*
-function getShuffledRecords(param) {
-  alert("in shuffled .");
-  return function (tx) {
-    alert("in in");
-    var selectIdSQL = "select id from words";
-    tx.executeSql(selectIdSQL, []);
-    alert(result.rows.item(0));
-  }
-}
-*/
 
 function getShuffledRecords(param) {
   db.transaction(function(tx){
@@ -49,14 +38,8 @@ function getShuffledRecords(param) {
         app.dbMessage(smallTab.join(" "));
         tx.executeSql("insert into parts (part) values(?)", [smallTab.join(" ")]);;
       }
-
-
-
-
-
-        }, errorDB);
-        }, errorDB, successDB
-      );
+    }, errorDB);
+  }, errorDB, successDB);
 }
  
 function insertRecord(param) {
@@ -162,7 +145,7 @@ var app = {
         }
       });
     
-      document.getElementById("prepareGroupsBtn").addEventListener('click', app.prepareGroups, false);
+      document.getElementById("preparePartsBtn").addEventListener('click', app.prepareParts, false);
 	
     }, // end onDeviceReady
 
@@ -182,8 +165,9 @@ var app = {
       ul.appendChild(li);
     },
     
-    prepareGroups: function() {
-      getShuffledRecords(100);
+    prepareParts: function() {
+      var value = parseInt($("#preparePartsBtnBox :selected").val());
+      getShuffledRecords(value);
     },
 
     readFromFile: function() {

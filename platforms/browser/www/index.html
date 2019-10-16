@@ -41,15 +41,31 @@
               <input type="checkbox" name="saveAllDbBtnBox" id="saveAllDbBtnBox" data-mini="true">
               <label for="saveAllDbBtnBox">I agree to save all records from db to file</label>
             </form>
-   
-            <button class="ui-btn ui-btn-b ui-icon-shop ui-btn-icon-left" id="prepareGroupsBtn">Save from db to file</button>
+            
+            <hr>
+            <form>
+              <div class="ui-field-contain">
+                <label for="select-native-2">Part size:</label>
+                <select name="preparePartsBtnBox" id="preparePartsBtnBox" data-mini="true">
+                  <option value="50">Create 50 items parts</option>
+                  <option value="100">Create 100 items parts</option>
+                  <option value="150">Create 150 items parts</option>
+                  <option value="200">Create 200 items parts</option>
+                  <option value="250">Create 250 items parts</option>
+                  <option value="500">Create 500 items parts</option>
+                  
+                </select>
+              </div>
+            </form>
+            <button class="ui-btn ui-btn-b ui-icon-shop ui-btn-icon-left" id="preparePartsBtn">Create parts</button>
            
           </div>
         </div>
      
         <div class="ui-block-b">
-          <div class="ui-bar ui-bar-a" style="" id="divMsg">
-           Log: 
+            Log: 
+            <div class="ui-bar ui-bar-a" style="" id="divMsg">
+
             <ul id="list"></ul>
             
           </div>
