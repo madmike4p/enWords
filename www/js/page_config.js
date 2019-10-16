@@ -8,14 +8,11 @@ function createDB(tx){
   createSQL  = 'create table if not exists words(id integer primary key, gb_word text not null, us_word text default "", ph_word text default "", ir_word text default "", pl_word text not null, rate integer default 0,notes text default "", added text default "", unique(gb_word, pl_word) on conflict ignore)';
   tx.executeSql(createSQL);
   
-  createSQL  = 'create table if not exists test(';
+  createSQL  = 'create table if not exists parts (';
   createSQL += 'id integer primary key,';
-  createSQL += 'gb_word text not null,';
-  createSQL += 'us_word text default "",';
-  createSQL += 'ph_word text default "",';
-  createSQL += 'ir_word text default "",';
-  createSQL += 'pl_word text not null,';
-  createSQL += 'notes text default ""';
+  createSQL += 'part txt not null,';
+  createSQL += 'used integer default 0,';
+  createSQL += 'lastused text default ""';
   createSQL += ');';
   tx.executeSql(createSQL); 
 }
@@ -24,7 +21,44 @@ function clearDB(tx){
   tx.executeSql("delete from words where 1");
   tx.executeSql("delete from test where 1"); 
 }
+/*
+function getShuffledRecords(param) {
+  alert("in shuffled .");
+  return function (tx) {
+    alert("in in");
+    var selectIdSQL = "select id from words";
+    tx.executeSql(selectIdSQL, []);
+    alert(result.rows.item(0));
+  }
+}
+*/
 
+function getShuffledRecords(param) {
+  db.transaction(function(tx){
+    tx.executeSql("delete from parts where 1");
+    tx.executeSql("select id from words", [],function(tx1, result) {	 
+      var len = result.rows.length;
+      var tab = [];
+      for (var x = 0; x < len; x++)  {
+        tab.push(result.rows.item(x).id);
+      }
+      shuffle(tab);
+
+      while (tab.length > 0) {
+        var smallTab = tab.splice(0, param);
+        app.dbMessage(smallTab.join(" "));
+        tx.executeSql("insert into parts (part) values(?)", [smallTab.join(" ")]);;
+      }
+
+
+
+
+
+        }, errorDB);
+        }, errorDB, successDB
+      );
+}
+ 
 function insertRecord(param) {
   return function (tx) {
     var insertSQL = 'insert into words (gb_word, us_word, ph_word, ir_word, pl_word, notes, rate, added) values (?, ?, ?, ?, ?, ?, ?, ?)';
@@ -34,6 +68,16 @@ function insertRecord(param) {
   }
 }
 
+function shuffle(array) {
+  var counter = array.length;
+  while (counter > 0) {
+    var index = Math.floor(Math.random() * counter);
+    counter--;
+    var temp = array[counter];
+    array[counter] = array[index];
+    array[index] = temp;
+  }
+}
 /*
 function writeLog(str) {
 	if(!logOb) return;
@@ -117,7 +161,8 @@ var app = {
           $('#saveAllDbBtn').attr("disabled", "");
         }
       });
-
+    
+      document.getElementById("prepareGroupsBtn").addEventListener('click', app.prepareGroups, false);
 	
     }, // end onDeviceReady
 
@@ -137,6 +182,10 @@ var app = {
       ul.appendChild(li);
     },
     
+    prepareGroups: function() {
+      getShuffledRecords(100);
+    },
+
     readFromFile: function() {
 
     window.resolveLocalFileSystemURL(cordova.file.externalDataDirectory, function(dir) {
