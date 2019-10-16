@@ -125,6 +125,13 @@ var app = {
       app.readFromFile();
     },
     
+    dbMessage: function(msg) {
+      var ul = document.getElementById("list");
+      var li = document.createElement("li");
+      li.appendChild(document.createTextNode(msg));
+      ul.appendChild(li);
+    },
+    
     readFromFile: function() {
 
     window.resolveLocalFileSystemURL(cordova.file.externalDataDirectory, function(dir) {
