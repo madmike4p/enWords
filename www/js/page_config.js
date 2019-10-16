@@ -32,11 +32,19 @@ function getShuffledRecords(param) {
         tab.push(result.rows.item(x).id);
       }
       shuffle(tab);
-
+      
+      var countPart = 0;
       while (tab.length > 0) {
         var smallTab = tab.splice(0, param);
-        app.dbMessage(smallTab.join(" "));
-        tx.executeSql("insert into parts (part) values(?)", [smallTab.join(" ")]);;
+        countPart += 1;
+
+        smallTab.forEach(function(item) {
+          tx.executeSql("update words set inpart = ? where id = ?", [countPart, item]);
+        });
+
+        tx.executeSql("insert into parts (part) values(?)", [smallTab.join(" ")]);
+      
+      app.dbMessage('Created ' + countPart + ' parts per ' + param + ' items');
       }
     }, errorDB);
   }, errorDB, successDB);
@@ -44,9 +52,7 @@ function getShuffledRecords(param) {
 
 function saveAllFromDbToFile(tx) {
   tx.executeSql("select gb_word, us_word, ph_word, ir_word, pl_word, notes, rate, added from words", [], function(tx1, result) {	 
-
     if(enWordsFile) {
-      
       var lines = [];
       for (var x = 0; x < result.rows.length; x++)  {
         var tab = [
@@ -61,24 +67,13 @@ function saveAllFromDbToFile(tx) {
           ];
           lines.push(tab.join('|'));
        }
-      
-      
-      
-      
       enWordsFile.createWriter(function(fileWriter) {
         fileWriter.write(lines.join("\n"));
+        app.dbMessage('Db dump saved, ' + lines.length + ' records');
       }, errorFile);
-      
-      
-      
-      
-      
-      
     }
-  
   }, errorDB); 
 }
-
 
 function insertRecord(param) {
   return function (tx) {
