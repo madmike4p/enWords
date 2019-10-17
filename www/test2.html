@@ -26,46 +26,43 @@
 
 
  <div class="w3-row">
-  <div class="w3-col s6 w3-center">
+  <div class="w3-col s7 w3-center">
+    <form class="w3-container">
+      <input class="w3-input w3-border w3-round" type="text" style="margin-top:4px; margin-bottom-4px;" id="search-1">
+    </form> 
   
-   <form class="w3-container">
-<input class="w3-input w3-border w3-round" type="text" style="margin-top:4px; margin-bottom-4px;" id="search-1">
-</form> 
-  
-  <div>
-  <p id="gb_word"></p>
-          <p id="us_word"></p>
-          <p id="ir_word"></p>
-          <p id="ph_word"></p>
-          <p id="pl_word"></p>
-          <p id="notes"></p>
-  
-  </div>
-  
-  </div>
-  <div class="w3-col s6">
+    <div class="w3-container">
+      <ul class="w3-ul w3-center" id="word"></ul>
+    </div>
   
   
-  <div class="w3-bar"  w3-center">
-  <div class="w3-bar-item">
-  <input class="w3-radio" type="radio" name="gender" value="male" checked>
-<label>English</label>
+    <!--
+    <div>
+      <p id="gb_word"></p>
+      <p id="us_word"></p>
+      <p id="ir_word"></p>
+      <p id="ph_word"></p>
+      <p id="pl_word"></p>
+      <p id="notes"></p>
+    </div>
+    -->
   
   </div>
-  <div class="w3-bar-item">
-  <input class="w3-radio" type="radio" name="gender" value="female">
-<label>Polish</label>
   
-  </div>
-
-</div> 
+  <div class="w3-col s5">
+    <div class="w3-bar"  w3-center">
+      <div class="w3-bar-item">
+        <input class="w3-radio" type="radio" name="gender" value="male" checked>
+        <label>English</label>
+      </div>
+      <div class="w3-bar-item">
+        <input class="w3-radio" type="radio" name="gender" value="female">
+        <label>Polish</label>
+      </div>
+    </div> 
   
-  
-  <div id="wordsEN"></div>
-  <div id="wordsPL"></div>
-
-  
-  
+    <div id="wordsEN"></div>
+    <div id="wordsPL"></div>
   </div>
 </div> 
 

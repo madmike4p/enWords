@@ -71,7 +71,7 @@ var app = {
           var searchString = '%' + $(this).val() + '%';
           if ($(this).val().length > 2) db.transaction(searchWordLike(searchString), errorDB, successDB);
         });
-
+document.getElementById('search-1').focus();
         /*
         document.getElementById('search-1');
         document.getElementById('search-1').focus();
@@ -103,10 +103,46 @@ var app = {
       db.transaction(function(tx){
 
       tx.executeSql("select * from words where id = ?", [id], function(tx1, result) {	 
-        document.getElementById("gb_word").innerHTML = (result.rows.item(0).gb_word);
-        document.getElementById("pl_word").innerHTML = result.rows.item(0).pl_word;
-        document.getElementById("ph_word").innerHTML = bracket2html(result.rows.item(0).ph_word);
+        
+        var ul = document.getElementById('word');
+        while (ul.firstChild) ul.removeChild(ul.firstChild);
+        
+        var node = document.createElement('li');
+        var text = document.createTextNode(result.rows.item(0).gb_word);
+        node.appendChild(text);
+        node.className = 'li_gb_word';
+        ul.appendChild(node);
+        
+        node = document.createElement('li');
+        text = document.createTextNode(result.rows.item(0).pl_word);
+        node.appendChild(text);
+        node.className = 'li_pl_word';
+        ul.appendChild(node);
+        
+        
+        var line = result.rows.item(0).ph_word;
+        line = line.replace(/\(ə\)/g, ':ə:');
+        var tab = line.split(':');
 
+        node = document.createElement('li');
+        node.className = 'li_ph_word';
+        
+        tab.forEach(function (item) {
+                  
+          if (item != 'ə') {
+            text = document.createTextNode(item);
+          } else {
+            text = document.createElement('span');
+            text.className = 'super';
+            schwa = document.createTextNode('ə');
+            text.appendChild(schwa);
+          }
+          
+          node.appendChild(text);
+        });
+        ul.appendChild(node);
+        
+        
       }, errorDB);
     }, errorDB, successDB);
 },

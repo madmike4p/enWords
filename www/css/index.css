@@ -24,8 +24,23 @@ a:active {
   text-decoration: none;
 }
 
-#gb_word {
-  border: 1px solid blue;
+.li_gb_word {
   background:url(../img/gb16.png) no-repeat center top;
   font-weight: bold;
+  background-repeat: no-repeat;
+  background-position: center left; 
+}
+
+.li_pl_word {
+  background:url(../img/pl16.png) no-repeat center top;
+  font-weight: bold;
+  background-repeat: no-repeat;
+  background-position: center left; 
+}
+
+.li_ph_word {
+  background:url(../img/vocal16.png) no-repeat center top;
+  font-weight: bold;
+  background-repeat: no-repeat;
+  background-position: center left; 
 }
