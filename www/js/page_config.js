@@ -1,8 +1,3 @@
-function errorDB(err) { alert("Error processing SQL: "+ err.code + " " + err.message); }
-function successDB() {}
-
-function errorFile(err) { alert("FileSystem Error: " + err); }
-
 function createDB(tx){
   var createSQL;
   createSQL  = 'create table if not exists words(id integer primary key, gb_word text not null, us_word text default "", ph_word text default "", ir_word text default "", pl_word text not null, notes text default "",  rate integer default 0, added text default "", inpart integer default 0, unique(gb_word, pl_word) on conflict ignore)';
@@ -84,55 +79,7 @@ function insertRecord(param) {
   }
 }
 
-function shuffle(array) {
-  var counter = array.length;
-  while (counter > 0) {
-    var index = Math.floor(Math.random() * counter);
-    counter--;
-    var temp = array[counter];
-    array[counter] = array[index];
-    array[index] = temp;
-  }
-}
 
-/*
-function writeLog(str) {
-	if(!enWordsFile) return;
-	enWordsFile.createWriter(function(fileWriter) {
-		fileWriter.seek(fileWriter.length);
-		fileWriter.write("some sample text, i moze jeszcze troch, i jeszcze troche");
-	}, errorFile);
-}
-
-
-function justForTesting() {
-	//alert(logOb.file);
-	logOb.file(function(file) {
-		var reader = new FileReader();
-
-		reader.onloadend = function(e) {
-			//alert(this.result);
-			//alert(this.result);
-			
-			//var tab = String(result);
-			var value = this.result.trim();
-			var lines = value.split("\n");
-			// alert(this.result.toUpperCase());
-			alert(lines.length);
-			alert(lines[0]);
-			
-		};
-
-		reader.readAsText(file);
-	}, fail);
-
-}
-
-          //writeLog("App started");	
-          //justForTesting();
-*/
-
-var db = window.openDatabase("enWords.db", "1.0", "enWords", 1000000);
 var enWordsFile;
 
 var _linesCount = 0;
@@ -235,7 +182,7 @@ var app = {
             var words = lines[x].split("|");
             if (words.length == 8) db.transaction(insertRecord(words), errorDB, successDB);
           }
-          app.countRecords();
+          countRecords("End, records in db: ?");
         };
         
         reader.readAsText(file);
@@ -251,16 +198,6 @@ var app = {
           });
         }); 
     }, // endsaveAllToFile
-    
-    countRecords: function (msg) {
-      db.transaction(function(tx){
-        tx.executeSql("select count(*) as myCount from words", [],function(tx1, result) {	 
-          app.dbMessage("End, records in db: " + result.rows.item(0).myCount);
-        }, errorDB);
-        }, errorDB, successDB
-      );
-    }, // end countRecords
-    
     
     receivedEvent: function(id) {
     } // end receivedEvent

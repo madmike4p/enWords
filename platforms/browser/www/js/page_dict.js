@@ -1,36 +1,3 @@
-var coma2pl = function (pl_line) {
-  // male litery
-  var line = pl_line.replace(/z\'\'/g, 'ź');
-  line = line.replace(/z\'/g, 'ż');
-  line = line.replace(/a\'/g, 'ą');
-  line = line.replace(/c\'/g, 'ć');
-  line = line.replace(/e\'/g, 'ę');
-  line = line.replace(/l\'/g, 'ł');
-  line = line.replace(/n\'/g, 'ń');
-  line = line.replace(/o\'/g, 'ó');
-  line = line.replace(/s\'/g, 'ś');
-  // duze litery
-  line = line.replace(/Z\'\'/g, 'Ź');
-  line = line.replace(/Z\'/g, 'Ż');
-  line = line.replace(/A\'/g, 'Ą');
-  line = line.replace(/C\'/g, 'Ć');
-  line = line.replace(/E\'/g, 'Ę');
-  line = line.replace(/L\'/g, 'Ł');
-  line = line.replace(/N\'/g, 'Ń');
-  line = line.replace(/O\'/g, 'Ó');
-  line = line.replace(/S\'/g, 'Ś');
-  return line;
-};
-
-var bracket2html = function (line) {
-  return line.replace(/\(ə\)/g, '<span class=\"super\">ə<\/span>');
-};
-
-function errorDB(err) { alert("Error processing SQL: "+ err.code + " " + err.message); }
-function successDB() {}
-
-
-
 function searchWordLike(param) {
   param = coma2pl(param);
   
