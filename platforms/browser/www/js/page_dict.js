@@ -46,6 +46,7 @@ function searchWordLike(param) {
 }
 
 
+
 var db = window.openDatabase("enWords.db", "1.0", "enWords", 1000000);
 
 var app = {
@@ -71,19 +72,9 @@ var app = {
           var searchString = '%' + $(this).val() + '%';
           if ($(this).val().length > 2) db.transaction(searchWordLike(searchString), errorDB, successDB);
         });
-document.getElementById('search-1').focus();
-        /*
-        document.getElementById('search-1');
         document.getElementById('search-1').focus();
-        document.getElementById('search-1').onblur= function() {
-          setTimeout(function() {
-            document.getElementById('search-1').focus();
-          }, 0);
-        };
-        */
-        
-        
-        
+
+
     }, // onDeviceReady
 
     bindWords: function() {
@@ -101,34 +92,53 @@ document.getElementById('search-1').focus();
     
     getWord: function(id) {
       db.transaction(function(tx){
-
       tx.executeSql("select * from words where id = ?", [id], function(tx1, result) {	 
+        app.createWord(
+          result.rows.item(0).gb_word,
+          result.rows.item(0).us_word,
+          result.rows.item(0).ph_word,        
+          result.rows.item(0).ir_word,
+          result.rows.item(0).pl_word,
+          result.rows.item(0).notes);
+      }, errorDB);
+    }, errorDB, successDB);},
+    
+    createWord: function(gb_word, us_word, ph_word, ir_word, pl_word, notes) {
+      var ul = document.getElementById('word');
+      while (ul.firstChild) ul.removeChild(ul.firstChild);
         
-        var ul = document.getElementById('word');
-        while (ul.firstChild) ul.removeChild(ul.firstChild);
+      node = document.createElement('li');
+      text = document.createTextNode(pl_word);
+      node.appendChild(text);
+      node.className = 'li_pl_word';
+      ul.appendChild(node); 
         
+      var node = document.createElement('li');
+      var text = document.createTextNode(gb_word);
+      node.appendChild(text);
+      node.className = 'li_gb_word';
+      ul.appendChild(node);
+      
+      if (us_word.length > 0) {
         var node = document.createElement('li');
-        var text = document.createTextNode(result.rows.item(0).gb_word);
+        var text = document.createTextNode(us_word);
         node.appendChild(text);
-        node.className = 'li_gb_word';
+        node.className = 'li_us_word';
         ul.appendChild(node);
-        
-        node = document.createElement('li');
-        text = document.createTextNode(result.rows.item(0).pl_word);
-        node.appendChild(text);
-        node.className = 'li_pl_word';
-        ul.appendChild(node);
-        
-        
-        var line = result.rows.item(0).ph_word;
+      }  
+      
+
+
+    
+      if (ph_word.length > 0 ) {
+        var line = ph_word;
         line = line.replace(/\(ə\)/g, ':ə:');
         var tab = line.split(':');
 
         node = document.createElement('li');
         node.className = 'li_ph_word';
-        
+          
         tab.forEach(function (item) {
-                  
           if (item != 'ə') {
             text = document.createTextNode(item);
           } else {
@@ -137,15 +147,21 @@ document.getElementById('search-1').focus();
             schwa = document.createTextNode('ə');
             text.appendChild(schwa);
           }
-          
+            
           node.appendChild(text);
         });
         ul.appendChild(node);
+      }
         
-        
-      }, errorDB);
-    }, errorDB, successDB);
-},
+      if (ir_word.length > 0) {
+        var node = document.createElement('li');
+        var text = document.createTextNode(ir_word);
+        node.appendChild(text);
+        node.className = 'li_ir_word';
+        ul.appendChild(node);
+      }        
+      
+    },
     
     receivedEvent: function(id) {
     } // receivedEvent

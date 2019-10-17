@@ -31,6 +31,13 @@ a:active {
   background-position: center left; 
 }
 
+.li_us_word {
+  background:url(../img/us16.png) no-repeat center top;
+  font-weight: bold;
+  background-repeat: no-repeat;
+  background-position: center left; 
+}
+
 .li_pl_word {
   background:url(../img/pl16.png) no-repeat center top;
   font-weight: bold;
@@ -43,4 +50,14 @@ a:active {
   font-weight: bold;
   background-repeat: no-repeat;
   background-position: center left; 
+}
+
+.li_ir_word {
+  background:url(../img/ir16.png) no-repeat center top;
+  font-weight: bold;
+  background-repeat: no-repeat;
+  background-position: center left;
+
+.w3-tag {
+  line-height: 90%
 }
