@@ -17,18 +17,15 @@ a:visited {
 }
 
 a:hover {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 a:active {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
-.w3-tag {
-  margin: 3px;
-  border:1 px black;
-}
-
-.w3-sidebar {
-  display: none;
+#gb_word {
+  border: 1px solid blue;
+  background:url(../img/gb16.png) no-repeat center top;
+  font-weight: bold;
 }

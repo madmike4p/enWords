@@ -4,14 +4,15 @@ function searchWordLike(param) {
   return function (tx) {
       
       tx.executeSql("select id, gb_word, ir_word, ph_word, pl_word, notes from words where gb_word like ?", [param], function(tx1, result) {	 
-        
         var tab = [];
+ 
         for (var x = 0; x < result.rows.length; x++) {
-          var line = '<a href="#" data-id="' + result.rows.item(x).id + '" class="enWord w3-tag w3-text-white w3-round w3-blue-grey w3-center" style="">' + result.rows.item(x).gb_word + '</a>';
+          var line = '<a href="#" data-id="{id}" class="enWord w3-tag w3-text-white w3-round w3-blue-grey w3-center">{word}</a>';
+          line = line.replace('{id}', result.rows.item(x).id);
+          line = line.replace('{word}', result.rows.item(x).gb_word);
           tab.push(line);
         }
-        
-        
+          
         if (tab.length > 0) {
           document.getElementById("wordsEN").innerHTML = tab.join(" ");
         }
@@ -21,8 +22,14 @@ function searchWordLike(param) {
       tx.executeSql("select id, gb_word, ir_word, ph_word, pl_word, notes from words where pl_word like ?", [param], function(tx1, result) {	 
         
         var tab = [];
+        
+        
         for (var x = 0; x < result.rows.length; x++) {
-          var line = '<a href="#" data-id="' + result.rows.item(x).id + '" class="plWord">' + result.rows.item(x).pl_word + '</a><br>';
+          
+          var line = '<a href="#" data-id="{id}" class="enWord w3-tag w3-text-white w3-round w3-red w3-center">{word}</a>';
+          line = line.replace('{id}', result.rows.item(x).id);
+          line = line.replace('{word}', result.rows.item(x).pl_word);
+          
           tab.push(line);
         }
         
@@ -57,7 +64,7 @@ var app = {
         $(".enWord").click(function() {
           alert("enWord");
         });
-        
+
         $("#search-1").on("input", function(){
           document.getElementById("wordsEN").innerHTML = '';
           document.getElementById("wordsPL").innerHTML = '';
