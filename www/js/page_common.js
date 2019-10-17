@@ -22,6 +22,10 @@ function shuffle(array) {
   }
 }
 
+function removeHTML(text) {
+  return text.replace(/\</g,'&lt;').replace(/\>/g,'&gt;').replace(/&/g, '&amp;');
+}
+
 var coma2pl = function (pl_line) {
   // male litery
   var line = pl_line.replace(/z\'\'/g, 'ź');
@@ -51,5 +55,3 @@ var bracket2html = function (line) {
 };
 
 var db = window.openDatabase("enWords.db", "1.0", "enWords", 1000000);
-
-alert("dupa 7");

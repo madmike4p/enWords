@@ -62,8 +62,17 @@ var app = {
           document.getElementById("wordsEN").innerHTML = '';
           document.getElementById("wordsPL").innerHTML = '';
           var searchString = '%' + $(this).val() + '%';
-          if ($(this).val().length > 3) db.transaction(searchWordLike(searchString), errorDB, successDB);
+          if ($(this).val().length > 2) db.transaction(searchWordLike(searchString), errorDB, successDB);
         });
+
+        document.getElementById('search-1');
+        document.getElementById('search-1').focus();
+        document.getElementById('search-1').onblur= function() {
+          setTimeout(function() {
+            document.getElementById('search-1').focus();
+          }, 0);
+        };
+
         
         
         
@@ -86,9 +95,9 @@ var app = {
       db.transaction(function(tx){
 
       tx.executeSql("select * from words where id = ?", [id], function(tx1, result) {	 
-        document.getElementById("gb_word").innerHTML = result.rows.item(0).gb_word;
+        document.getElementById("gb_word").innerHTML = (result.rows.item(0).gb_word);
         document.getElementById("pl_word").innerHTML = result.rows.item(0).pl_word;
-        document.getElementById("ph_word").innerHTML = result.rows.item(0).ph_word;
+        document.getElementById("ph_word").innerHTML = bracket2html(result.rows.item(0).ph_word);
 
       }, errorDB);
     }, errorDB, successDB);
