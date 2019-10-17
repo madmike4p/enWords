@@ -7,7 +7,7 @@ function searchWordLike(param) {
         
         var tab = [];
         for (var x = 0; x < result.rows.length; x++) {
-          var line = '<a href="#" data-id="' + result.rows.item(x).id + '" class="enWord">' + result.rows.item(x).gb_word + '</a><br>';
+          var line = '<a href="#" data-id="' + result.rows.item(x).id + '" class="enWord w3-tag w3-text-white w3-round w3-blue-grey w3-center" style="">' + result.rows.item(x).gb_word + '</a>';
           tab.push(line);
         }
         
@@ -65,6 +65,7 @@ var app = {
           if ($(this).val().length > 2) db.transaction(searchWordLike(searchString), errorDB, successDB);
         });
 
+        /*
         document.getElementById('search-1');
         document.getElementById('search-1').focus();
         document.getElementById('search-1').onblur= function() {
@@ -72,7 +73,7 @@ var app = {
             document.getElementById('search-1').focus();
           }, 0);
         };
-
+        */
         
         
         
