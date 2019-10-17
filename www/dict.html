@@ -14,48 +14,40 @@
 </head>
 
 <body>
-  <div data-role="page">
-  
-
-
-  
+  <div data-role="page" data-theme="b">
     <div data-role="header">
-     <a href="index.html" data-icon="home" data-ajax="false">Main</a>
-    <h1>Dictionary</h1>
+      <a href="index.html" data-icon="home" data-ajax="false">Main</a>
+      <h1>Dictionary</h1>
     </div><!-- /header -->
 	
     <div role="main" style="ui-content">
     
-<div class="ui-grid-a">
-    <div class="ui-block-a"><div class="ui-bar" style="height:60px">
-    
-     <input type="search" name="search-1" id="search-1" value="">
-
-    
-    </div></div>
-    <div class="ui-block-b"><div class="ui-bar" style="">
-    
-    
-    <div class="ui-grid-a">
-    <div class="ui-block-a"><a class="ui-shadow ui-btn ui-mini ui-corner-all">in English</a></div>
-    <div class="ui-block-b"><a class="ui-shadow ui-btn ui-mini ui-corner-all">in Polish</a></div>
-</div>
-    
-    
-    </div></div>
-</div><!-- /grid-a -->
+      <div class="ui-grid-a">
+        <div class="ui-block-a"><div class="ui-bar">
+          <input type="search" name="search-1" id="search-1" value=""> 
+          
+          <div class="ui-body ui-body-a ui-corner-all" id="wordsEN"></div> 
+          <div class="ui-body ui-body-a ui-corner-all" id="wordsPL"></div>
+          
+        </div>
+       </div>
+       
+        <div class="ui-block-b">
+          <div class="ui-bar" style="">
+        
+          </div>
+        </div>
+      </div>
     
     
-    
-
-
     </div>
-      
-    <div data-role="footer" data-position="fixed" data-fullscreen="true"><h4 id="divMsg"></h4></div>
+   
+    
+   
+   </div>
+    
   
-
-  </div>
-  
+   
   <script type="text/javascript" src="cordova.js"></script>
   <script type="text/javascript" src="js/app_common.js"></script>
   <script type="text/javascript" src="js/page_dict.js"></script>
