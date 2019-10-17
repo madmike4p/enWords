@@ -7,46 +7,34 @@
   <meta name="msapplication-tap-highlight" content="no" />
   <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
   <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' gap:; style-src 'self' 'unsafe-inline'; media-src *" />
+    <link rel="stylesheet" type="text/css" href="css/w3.css" />
   <link rel="stylesheet" type="text/css" href="css/index.css" />
-  <script src="mobile/jquery-2.2.4.min.js"></script>
-	<link rel="stylesheet" href="mobile/jquery.mobile-1.4.5.min.css" />
-  <script src="mobile/jquery.mobile-1.4.5.min.js"></script>
-  <title>Hello World</title>
+  <title>Main Page</title>
 </head>
-
 <body>
-  <div data-role="page"  data-theme="b">
-    <div data-role="header">
-      <h1>Main</h1>
-    </div><!-- /header -->
-	
-    <div role="main" style="ui-content">
-    
+ 
+<div class="w3-container w3-dark-gray">
+  <div class="w3-row">
+    <div class="w3-col s3 w3-dark-gray w3-left"><h4>Main</h4></div>
+    <div class="w3-col s9 w3-dark-gray w3-center"><p id="divMsg"></p></div>
+  </div> 
+</div> 
 
-    
-    <ul data-role="listview" data-inset="true">
-    <li><a href="test2.html" data-ajax="false">TEST2</a></li>
-        <li><a href="test.html" data-ajax="false">TEST</a></li>
-    <li><a href="" data-ajax="false">Start with last used</a></li>
-    <li><a href="" data-ajax="false">Select words pack</a></li>
-    <li><a href="new.html" data-ajax="false">Add a new word</a></li>
-    <li><a href="dict.html" data-ajax="false">Dictionary</a></li>
-    <li><a href="config.html" data-ajax="false">Configuration</a></li>
-</ul>
-    
-    </div>
-      
-    <div data-role="footer" data-position="fixed" data-fullscreen="true"><h4 id="divMsg"></h4></div>
-  
+<div class="w3-container" style="margin-top: 20px;">
+  <div class="w3-bar-block w3-black">
+    <a href="#" class="w3-bar-item w3-button w3-border">Start last used</a>
+    <a href="#" class="w3-bar-item w3-button w3-border">Select words pack</a>
+    <a href="dict.html" class="w3-bar-item w3-button  w3-border">Dictionary</a>
+    <a href="#" class="w3-bar-item w3-button  w3-border">Add new word</a>
+    <a href="conf.html" class="w3-bar-item w3-button  w3-border">Configuration</a>
+  </div> 
+</div>
 
-  </div>
-  
-  <script type="text/javascript" src="cordova.js"></script>
-  <script type="text/javascript" src="js/page_common.js"></script>
-  <script type="text/javascript" src="js/page_index.js"></script>
-  <script type="text/javascript">
-    app.initialize();
-  </script>
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="js/page_common.js"></script>
+<script type="text/javascript" src="js/page_index.js"></script>
+<script type="text/javascript">
+app.initialize();
+</script>
 </body>
-
 </html>
