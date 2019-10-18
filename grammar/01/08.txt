@@ -28,7 +28,7 @@ Jestem w kuchni.
 Lampka jest na stole, nie nad stołem.
 Moje biurko jest pomiędzy twoim i jego.
 Moje auto jest pomiędzy tym czerwonym i niebieskim.
-
+---
 The coffee is on the table.
 Where is Mark?
 Is he at work?

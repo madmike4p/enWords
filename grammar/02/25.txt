@@ -28,7 +28,7 @@ Komu to powinnam dać?
 O kim mówicie?
 Z kim chcesz rozmawiać?
 O czym było spotkanie?
-
+---
 What are you thinking about?
 What did you talk about yesterday?
 What does it depend on?

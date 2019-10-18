@@ -28,7 +28,7 @@ To jest mój szef.
 Tamta książka jest bardzo droga.
 Ten samochód jest czerwony.
 Tamten jest niebieski.
-
+---
 This is a dictionary and that is a calendar.
 What’s this?
 It’s a phone.

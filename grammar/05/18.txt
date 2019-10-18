@@ -28,7 +28,7 @@ Wygląda prosto, jak taki typowy telefon.
 Jak pachną te perfumy?
 Pachną słodko.
 Chciałabym, żeby to brzmiało bardziej realistycznie.
-
+---
 You look as if you hadn’t slept for three days.
 I feel as if I’m going to be sick.
 They treated me as if I were a stranger.

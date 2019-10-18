@@ -28,7 +28,7 @@ Moje.
 Czyj to jest samochód?
 Ten jest mój. Tamten jest jego.
 Ten po lewej jest jej, a ten po prawej jest ich.
-
+---
 His house is very big.
 Her keys are on the table.
 My money is in the bank.

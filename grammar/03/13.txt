@@ -28,7 +28,7 @@ Ktoś mi powiedział, że kupiłeś nowy samochód.
 Nie znam nikogo, kto by chciał to kupić.
 Nikt nie przyszedł na spotkanie.
 Dlaczego nikt nie przyszedł na spotkanie?
-
+---
 Something is wrong here.
 Is there anything I could help you with?
 Is there anyone here who can speak French?

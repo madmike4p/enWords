@@ -28,7 +28,7 @@ Czy chciałbyś pojechać w góry? |Nie.
 Czy były jakieś telefony do mnie, kiedy mnie nie było? |Tak.
 Odwiedzisz nas w przyszłym miesiącu? |Tak.
 Byłeś w pracy wczoraj o dziewiątej? |Nie.
-
+---
 Are you cold? |Yes, I am.
 Do you live near here? |No, I don’t.
 Is this your coat? |Yes, it is.

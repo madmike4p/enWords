@@ -28,7 +28,7 @@ Zaakceptuję ofertę, pod warunkiem że obniżycie ceny.
 Pożyczę ci mój samochód, pod warunkiem że będziesz o niego dbał.
 Powiem ci prawdę pod jednym warunkiem - że nie powiesz nikomu.
 Powiem ci pod warunkiem, że dotrzymasz tajemnicy.
-
+---
 As a result of bad management, the company went bankrupt.
 I worked very hard and, as a result, I got promoted.
 This product has a defect. That’s why I’m sending it back.

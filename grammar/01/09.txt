@@ -28,7 +28,7 @@ W kuchni jest lodówka, kuchenka, zmywarka i parę talerzy.
 Czy jest jakiś hotel blisko waszego biura?
 W tym pokoju nie ma klimatyzacji.
 Czy w pokoju jest telewizor?
-
+---
 There is a letter for you.
 There is a problem.
 There are some problems.

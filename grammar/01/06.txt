@@ -28,7 +28,7 @@ Jest za dziesięć druga (po południu).
 O której godzinie jest spotkanie?
 O której godzinie są zajęcia?
 O w pół do dziewiątej rano.
-
+---
 What day is today?
 Today is Monday.
 Saturday is always very short.

@@ -28,7 +28,7 @@ Kto z tobą poszedł?
 Z kim wyszedłeś wczoraj wieczorem?
 Co sprawia, że jesteś szczęśliwy?
 Czy twoja praca sprawia, że jesteś szczęśliwy?
-
+---
 What happened?
 When did it happen?
 Who told you that?

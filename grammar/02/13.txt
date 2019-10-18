@@ -28,7 +28,7 @@ Twój dom jest dalej od biura niż mój.
 Twoja walizka jest cięższa od mojej.
 Ten kolor bardziej mi się podoba, bo jest jaśniejszy.
 Musisz być bardziej ostrożny.
-
+---
 This box is bigger and that one is smaller.
 It’s more difficult than you think.
 She studies harder than her brother.

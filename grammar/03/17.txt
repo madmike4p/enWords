@@ -28,7 +28,7 @@ Chciał, żebym mu pomogła.
 O co cię poprosił?
 Poprosił, żebym mu pomogła spakować walizkę.
 Poprosił mnie też, żebym zadzwoniła po taksówkę.
-
+---
 Tell him to call me.
 Ask her to come here.
 Tell her not to come.

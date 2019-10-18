@@ -28,7 +28,7 @@ Czy ci mężczyźni są twoimi przyjaciółmi?
 Tak, są.
 Tamte komputery nie są na sprzedaż.
 Czy tamte pudełka są puste?
-
+---
 These books are interesting.
 Those books are about history.
 These paintings are well-known.

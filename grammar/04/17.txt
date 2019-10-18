@@ -28,7 +28,7 @@ Jest tyle wiadomości, że nie wiem od czego zacząć.
 To jest taki dobry pomysł!
 Nie gadaj tyle!
 Nie pal tyle!
-
+---
 The car is so expensive that unfortunately we can’t afford it.
 It’s such an expensive car that we can’t afford it.
 The movie was so long and boring that I fell asleep.

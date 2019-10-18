@@ -28,7 +28,7 @@ Oni tutaj mieszkają, odkąd skończyli szkołę.
 Nie wyszłam z domu od ostatniego weekendu.
 Widziałaś go od kiedy się wyprowadził?
 Studiowałem na dwóch różnych uniwersytetach od ukończenia szkoły średniej.
-
+---
 Where have you been?
 How long have you been here?
 I have been here for a week.
