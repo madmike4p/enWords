@@ -22,9 +22,9 @@ var books = [
 var db_chapter_id = 1;
 var db_sentence_id = 1;
 for (var bookId = 1; bookId <= books.length; bookId++) {
-  var sql = 'insert into books (id, book) values(?, "?")';
-  sql = sql.replace("?", bookId);
-  sql = sql.replace("?", books[bookId - 1]);;
+  var sql = 'insert into books (id, book) values({?}, "{?}")';
+  sql = sql.replace("{?}", bookId);
+  sql = sql.replace("{?}", books[bookId - 1]);;
   sqlBooks.push(sql);
 
   var dir = '';
@@ -36,11 +36,11 @@ for (var bookId = 1; bookId <= books.length; bookId++) {
   var chapters = contents.split("\n");
 
   for (var chapterId = 1; chapterId <= chapters.length; chapterId++) {
-    sql = 'insert into chapters (id, bookId, chapterId, title) values(?, ?, ? "?")';
-    sql = sql.replace("?", db_chapter_id++);
-    sql = sql.replace("?", bookId);
-    sql = sql.replace("?", chapterId);
-    sql = sql.replace("?", chapters[chapterId - 1]);; 
+    sql = 'insert into chapters (id, bookId, chapterId, title) values({?}, {?}, {?} "{?}")';
+    sql = sql.replace("{?}", db_chapter_id++);
+    sql = sql.replace("{?}", bookId);
+    sql = sql.replace("{?}", chapterId);
+    sql = sql.replace("{?}", chapters[chapterId - 1]);; 
     sqlChapters.push(sql);
 
     // console.log("Book nr " + bookId + ', chapter nr ' + chapterId);
@@ -55,17 +55,17 @@ for (var bookId = 1; bookId <= books.length; bookId++) {
     var count = Math.floor(sentences.length / 2);
 
     for (var x = 0; x < count; x++) {
-      var sql = 'insert into sentences (id, bookId, chapterId, pl, en) value(?, ?, ?, "?", "?")';
+      var sql = 'insert into sentences (id, bookId, chapterId, pl, en) value({?}, {?}, {?}, "{?}", "{?}")';
 
       
       var pl = sentences[x].replace(/\"/g,"'").replace(/\`/g,"'");
       var en = sentences[x + 1 + count].replace(/\"/g,"'").replace(/\`/g,"'");
 
-      sql = sql.replace("?", db_sentence_id++); 
-      sql = sql.replace("?", bookId); 
-      sql = sql.replace("?", chapterId); 
-      sql = sql.replace("?", pl); 
-      sql = sql.replace("?", en); 
+      sql = sql.replace("{?}", db_sentence_id++); 
+      sql = sql.replace("{?}", bookId); 
+      sql = sql.replace("{?}", chapterId); 
+      sql = sql.replace("{?}", pl); 
+      sql = sql.replace("{?}", en); 
       sqlSentences.push(sql);
     }
 
@@ -81,5 +81,8 @@ console.log(sqlSentences.length);
 //console.log();
 //console.log(sqlChapters.join('\n'));
 //console.log();
-console.log(sqlSentences.join('\n'));
+//console.log(sqlSentences.join('\n'));
 
+var newContent = sqlBooks.join(';\n') + ';\n' + sqlChapters.join(';\n') + ';\n' + sqlSentences.join(';\n') + ';';
+
+fs.writeFileSync("test.sql", newContent);
