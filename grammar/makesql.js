@@ -1,5 +1,11 @@
 const fs = require('fs');
 
+var sqlTableBooks = 'create table if not exists books (id integer primary key, book text default "")';
+var sqlTableChapters = 'create table if not exists chapters (id integer primary key, bookId integer, chapter integer, title text)';
+var sqlTableSentences = 'create table if not exists sentences(id integer primary key, chapterId integer, sentence integer, pl text, en text)';
+
+var sqlCreate = sqlTableBooks + ';\n' + sqlTableChapters + ';\n' + sqlTableSentences + ';';
+
 var sqlBooks = [];
 var sqlChapters = [];
 var sqlSentences = [];
@@ -36,7 +42,7 @@ for (var bookId = 1; bookId <= books.length; bookId++) {
   var chapters = contents.split("\n");
 
   for (var chapterId = 1; chapterId <= chapters.length; chapterId++) {
-    sql = 'insert into chapters (id, bookId, chapterId, title) values({?}, {?}, {?} "{?}")';
+    sql = 'insert into chapters (id, bookId, chapter, title) values({?}, {?}, {?}, "{?}")';
     sql = sql.replace("{?}", db_chapter_id++);
     sql = sql.replace("{?}", bookId);
     sql = sql.replace("{?}", chapterId);
@@ -53,17 +59,17 @@ for (var bookId = 1; bookId <= books.length; bookId++) {
     var contents = fs.readFileSync(chapterFile, 'utf8');
     var sentences = contents.trim().split('\n');
     var count = Math.floor(sentences.length / 2);
-
+/////dopisac pole sentence
     for (var x = 0; x < count; x++) {
-      var sql = 'insert into sentences (id, bookId, chapterId, pl, en) value({?}, {?}, {?}, "{?}", "{?}")';
+      var sql = 'insert into sentences (id, chapterId, sentence, pl, en) values ({?}, {?}, {?}, "{?}", "{?}")';
 
       
       var pl = sentences[x].replace(/\"/g,"'").replace(/\`/g,"'");
       var en = sentences[x + 1 + count].replace(/\"/g,"'").replace(/\`/g,"'");
 
       sql = sql.replace("{?}", db_sentence_id++); 
-      sql = sql.replace("{?}", bookId); 
       sql = sql.replace("{?}", chapterId); 
+      sql = sql.replace("{?}", x + 1);
       sql = sql.replace("{?}", pl); 
       sql = sql.replace("{?}", en); 
       sqlSentences.push(sql);
@@ -85,4 +91,8 @@ console.log(sqlSentences.length);
 
 var newContent = sqlBooks.join(';\n') + ';\n' + sqlChapters.join(';\n') + ';\n' + sqlSentences.join(';\n') + ';';
 
-fs.writeFileSync("test.sql", newContent);
+fs.writeFileSync("create.sql", sqlCreate);
+fs.writeFileSync("books.sql", sqlBooks.join(';\n') + ';');
+fs.writeFileSync("chapters.sql", sqlChapters.join(';\n') + ';');
+fs.writeFileSync("sentences.sql", sqlSentences.join(';\n') + ';');
+

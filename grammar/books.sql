@@ -1,0 +1,12 @@
+insert into books (id, book) values(1, "Grammar 1");
+insert into books (id, book) values(2, "Grammar 2");
+insert into books (id, book) values(3, "Grammar 3");
+insert into books (id, book) values(4, "Grammar 4");
+insert into books (id, book) values(5, "Grammar 5");
+insert into books (id, book) values(6, "Grammar 6");
+insert into books (id, book) values(7, "Prasal verbs 1");
+insert into books (id, book) values(8, "Prasal verbs 2");
+insert into books (id, book) values(9, "Prasal verbs 3");
+insert into books (id, book) values(10, "Business 1");
+insert into books (id, book) values(11, "Business 2");
+insert into books (id, book) values(12, "Business 3");
