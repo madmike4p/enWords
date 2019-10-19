@@ -1,10 +1,14 @@
 const fs = require('fs');
 
+var sqlTable = [];
+
 var sqlTableBooks = 'create table if not exists books (id integer primary key, book text default "")';
 var sqlTableChapters = 'create table if not exists chapters (id integer primary key, bookId integer, chapter integer, title text)';
 var sqlTableSentences = 'create table if not exists sentences(id integer primary key, chapterId integer, sentence integer, pl text, en text)';
 
-var sqlCreate = sqlTableBooks + ';\n' + sqlTableChapters + ';\n' + sqlTableSentences + ';';
+sqlTable.push(sqlTableBooks);
+sqlTable.push(sqlTableChapters);
+sqlTable.push(sqlTableSentences);
 
 var sqlBooks = [];
 var sqlChapters = [];
@@ -31,7 +35,8 @@ for (var bookId = 1; bookId <= books.length; bookId++) {
   var sql = 'insert into books (id, book) values({?}, "{?}")';
   sql = sql.replace("{?}", bookId);
   sql = sql.replace("{?}", books[bookId - 1]);;
-  sqlBooks.push(sql);
+  
+  sqlTable.push(sql);
 
   var dir = '';
   dir = bookId < 10 ? "0" + bookId : bookId;
@@ -42,12 +47,16 @@ for (var bookId = 1; bookId <= books.length; bookId++) {
   var chapters = contents.split("\n");
 
   for (var chapterId = 1; chapterId <= chapters.length; chapterId++) {
+    var title =chapters[chapterId - 1].trim().replace(/\`/g,"'").replace(/\"/g,"'").replace(/\'/g,"\\'");
+    
     sql = 'insert into chapters (id, bookId, chapter, title) values({?}, {?}, {?}, "{?}")';
     sql = sql.replace("{?}", db_chapter_id++);
     sql = sql.replace("{?}", bookId);
     sql = sql.replace("{?}", chapterId);
-    sql = sql.replace("{?}", chapters[chapterId - 1]);; 
-    sqlChapters.push(sql);
+    sql = sql.replace("{?}", title); 
+    
+    
+    sqlTable.push(sql);
 
     // console.log("Book nr " + bookId + ', chapter nr ' + chapterId);
     var chapterFile = dir + '/';
@@ -64,14 +73,16 @@ for (var bookId = 1; bookId <= books.length; bookId++) {
       var sql = 'insert into sentences (id, chapterId, sentence, pl, en) values ({?}, {?}, {?}, "{?}", "{?}")';
 
       
-      var pl = sentences[x].replace(/\"/g,"'").replace(/\`/g,"'");
-      var en = sentences[x + 1 + count].replace(/\"/g,"'").replace(/\`/g,"'");
+      var pl = sentences[x].replace(/\`/g,"'").replace(/\"/g,"'").replace(/\'/g,"\\'");
+      var en = sentences[x + 1 + count].replace(/\`/g,"'").replace(/\"/g,"'").replace(/\'/g,"\\'");
 
       sql = sql.replace("{?}", db_sentence_id++); 
       sql = sql.replace("{?}", chapterId); 
       sql = sql.replace("{?}", x + 1);
-      sql = sql.replace("{?}", pl); 
-      sql = sql.replace("{?}", en); 
+      sql = sql.replace("{?}", pl.trim()); 
+      sql = sql.replace("{?}", en.trim()); 
+      
+      sqlTable.push(sql);
       sqlSentences.push(sql);
     }
 
@@ -89,10 +100,8 @@ console.log(sqlSentences.length);
 //console.log();
 //console.log(sqlSentences.join('\n'));
 
-var newContent = sqlBooks.join(';\n') + ';\n' + sqlChapters.join(';\n') + ';\n' + sqlSentences.join(';\n') + ';';
+for (x = 0; x < sqlTable.length; x++ ) {
+  sqlTable[x] = "tab.push('" + sqlTable[x] + "');";
+}
 
-fs.writeFileSync("create.sql", sqlCreate);
-fs.writeFileSync("books.sql", sqlBooks.join(';\n') + ';');
-fs.writeFileSync("chapters.sql", sqlChapters.join(';\n') + ';');
-fs.writeFileSync("sentences.sql", sqlSentences.join(';\n') + ';');
-
+fs.writeFileSync("mysql.sql", sqlTable.join('\n'));

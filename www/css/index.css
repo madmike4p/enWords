@@ -24,32 +24,32 @@ a:active {
   text-decoration: none;
 }
 
-#pl {
+.pl {
   background:url(../img/pl16.png); 
 }
 
 
-#gb {
+.gb {
   background:url(../img/gb16.png); 
 }
 
-#us {
+.us {
   background:url(../img/us16.png); 
 }
 
-#ph {
+.ph {
   background:url(../img/ph16.png); 
 }
 
-#ir {
+.ir {
   background:url(../img/ir16.png); 
 }
 
-#note {
+.note {
   background:url(../img/note16.png); 
 }
 
-#gb, #pl, #us, #ph, #ir, #note {
+.gb, .pl, .us, .ph, .ir, .note {
   background-color: white;   
   color: black;   
   padding: 8px; 
@@ -57,12 +57,16 @@ a:active {
   border-bottom: 1px solid lightgray;
   background-repeat: no-repeat;
   background-position: 10px 10px; 
-  height: 20px;
-  display: none;
+
+
 }
 
-#pl p, #gb p, #us p, #ph p, #ir p, #note p  {
+.pl p, .gb p, .us p, .ph p, .ir p, .note p  {
   margin: 0;
+}
+
+#gb, #pl, #us, #ph, #ir, #note {
+    display: none;
 }
 
 .tag {
