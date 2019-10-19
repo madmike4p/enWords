@@ -66,13 +66,13 @@ var app = {
           alert("enWord");
         });
 
-        $("#search-1").on("input", function(){
+        $("#search").on("input", function(){
           document.getElementById("wordsEN").innerHTML = '';
           document.getElementById("wordsPL").innerHTML = '';
           var searchString = '%' + $(this).val() + '%';
           if ($(this).val().length > 2) db.transaction(searchWordLike(searchString), errorDB, successDB);
         });
-        document.getElementById('search-1').focus();
+        document.getElementById('search').focus();
 
 
     }, // onDeviceReady
@@ -104,64 +104,42 @@ var app = {
     }, errorDB, successDB);},
     
     createWord: function(gb_word, us_word, ph_word, ir_word, pl_word, notes) {
-      var ul = document.getElementById('word');
-      while (ul.firstChild) ul.removeChild(ul.firstChild);
-        
-      node = document.createElement('li');
-      text = document.createTextNode(pl_word);
-      node.appendChild(text);
-      node.className = 'li_pl_word';
-      ul.appendChild(node); 
-        
-      var node = document.createElement('li');
-      var text = document.createTextNode(gb_word);
-      node.appendChild(text);
-      node.className = 'li_gb_word';
-      ul.appendChild(node);
+      document.getElementById('pl').style.display = 'none';
+      document.getElementById('gb').style.display = 'none';
+      document.getElementById('us').style.display = 'none';      
+      document.getElementById('ph').style.display = 'none';
+      document.getElementById('ir').style.display = 'none';
+      document.getElementById('note').style.display = 'none';
       
-      if (us_word.length > 0) {
-        var node = document.createElement('li');
-        var text = document.createTextNode(us_word);
-        node.appendChild(text);
-        node.className = 'li_us_word';
-        ul.appendChild(node);
-      }  
+      document.getElementById('pl').style.display = 'block';
+      document.getElementById('pl').firstElementChild.innerHTML = removeHTML(pl_word);
       
-
-
-    
-      if (ph_word.length > 0 ) {
-        var line = ph_word;
-        line = line.replace(/\(ə\)/g, ':ə:');
-        var tab = line.split(':');
-
-        node = document.createElement('li');
-        node.className = 'li_ph_word';
-          
-        tab.forEach(function (item) {
-          if (item != 'ə') {
-            text = document.createTextNode(item);
-          } else {
-            text = document.createElement('span');
-            text.className = 'super';
-            schwa = document.createTextNode('ə');
-            text.appendChild(schwa);
-          }
-            
-          node.appendChild(text);
-        });
-        ul.appendChild(node);
+      document.getElementById('gb').style.display = 'block';
+      document.getElementById('gb').firstElementChild.innerHTML = removeHTML(gb_word);
+      
+      if (us_word) {
+        document.getElementById('us').parentNode.display = 'block';
+        document.getElementById('us').firstElementChild.innerHTML = removeHTML(us_word);
       }
-        
-      if (ir_word.length > 0) {
-        var node = document.createElement('li');
-        var text = document.createTextNode(ir_word);
-        node.appendChild(text);
-        node.className = 'li_ir_word';
-        ul.appendChild(node);
-      }        
       
+      if (ph_word) {
+        document.getElementById('ph').style.display = 'block';
+        document.getElementById('ph').firstElementChild.innerHTML = bracket2html(ph_word);
+      }
+      
+       if (ir_word) {
+        document.getElementById('ir').style.display = 'block';
+        document.getElementById('ir').firstElementChild.innerHTML = removeHTML(ir_word);
+      }
+      
+      if (notes) {
+        document.getElementById('note').style.display = 'block';
+        document.getElementById('note').firstElementChild.innerHTML = removeHTML(notes);
+      }
     },
+    
+        
+    
     
     receivedEvent: function(id) {
     } // receivedEvent

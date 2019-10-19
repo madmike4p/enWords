@@ -23,7 +23,7 @@ function shuffle(array) {
 }
 
 function removeHTML(text) {
-  return text.replace(/\</g,'&lt;').replace(/\>/g,'&gt;').replace(/&/g, '&amp;');
+  return text.replace(/\</g,'[').replace(/\>/g,']')
 }
 
 var coma2pl = function (pl_line) {

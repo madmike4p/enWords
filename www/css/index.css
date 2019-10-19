@@ -24,40 +24,55 @@ a:active {
   text-decoration: none;
 }
 
-.li_gb_word {
-  background:url(../img/gb16.png) no-repeat center top;
-  font-weight: bold;
-  background-repeat: no-repeat;
-  background-position: center left; 
+
 }
 
-.li_us_word {
-  background:url(../img/us16.png) no-repeat center top;
-  font-weight: bold;
-  background-repeat: no-repeat;
-  background-position: center left; 
+
+
+
+
+
+#pl {
+  background:url(../img/gb16.png); 
 }
 
-.li_pl_word {
-  background:url(../img/pl16.png) no-repeat center top;
-  font-weight: bold;
-  background-repeat: no-repeat;
-  background-position: center left; 
+
+#gb {
+  background:url(../img/gb16.png); 
 }
 
-.li_ph_word {
-  background:url(../img/vocal16.png) no-repeat center top;
-  font-weight: bold;
-  background-repeat: no-repeat;
-  background-position: center left; 
+#us {
+  background:url(../img/us16.png); 
 }
 
-.li_ir_word {
-  background:url(../img/ir16.png) no-repeat center top;
-  font-weight: bold;
-  background-repeat: no-repeat;
-  background-position: center left;
+#ph {
+  background:url(../img/ph16.png); 
+}
 
-.w3-tag {
-  line-height: 90%
+#ir {
+  background:url(../img/ir16.png); 
+}
+
+#note {
+  background:url(../img/note16.png); 
+}
+
+#pl, #gb, #us, #ph, #ir, #note {
+  background-color: white;   
+  color: black;   
+  padding: 8px; 
+  padding-left: 45px;
+  border-bottom: 1px solid lightgray;
+  background-repeat: no-repeat;
+  background-position: 10px 10px; 
+  height: 20px;
+  display: none;
+}
+
+#pl p, #gb p, #us p, #ph p, #ir p, #note p  {
+  margin: 0;
+}
+
+#pl {
+  display: block;
 }
