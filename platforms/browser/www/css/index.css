@@ -24,16 +24,8 @@ a:active {
   text-decoration: none;
 }
 
-
-}
-
-
-
-
-
-
 #pl {
-  background:url(../img/gb16.png); 
+  background:url(../img/pl16.png); 
 }
 
 
@@ -57,7 +49,7 @@ a:active {
   background:url(../img/note16.png); 
 }
 
-#pl, #gb, #us, #ph, #ir, #note {
+#gb, #pl, #us, #ph, #ir, #note {
   background-color: white;   
   color: black;   
   padding: 8px; 
@@ -73,6 +65,18 @@ a:active {
   margin: 0;
 }
 
-#pl {
-  display: block;
+.tag {
+  background-color:#000;
+  color:#fff;
+  display:inline-block;
+  padding-left:8px;
+  padding-right:8px;
+  padding: 5px;
+  text-align:center;
+  margin-bottom: 5px;
+  border-radius:6px;
+}
+
+tag a {
+color:#fff!important
 }

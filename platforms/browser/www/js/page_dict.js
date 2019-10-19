@@ -7,7 +7,7 @@ function searchWordLike(param) {
         var tab = [];
  
         for (var x = 0; x < result.rows.length; x++) {
-          var line = '<a href="#" data-id="{id}" class="enWord w3-tag w3-text-white w3-round w3-blue-grey w3-center">{word}</a>';
+          var line = '<a href="#" data-id="{id}" class="enWord tag" style="color: white">{word}</a>';
           line = line.replace('{id}', result.rows.item(x).id);
           line = line.replace('{word}', result.rows.item(x).gb_word);
           tab.push(line);
@@ -26,7 +26,7 @@ function searchWordLike(param) {
         
         for (var x = 0; x < result.rows.length; x++) {
           
-          var line = '<a href="#" data-id="{id}" class="enWord w3-tag w3-text-white w3-round w3-red w3-center">{word}</a>';
+          var line = '<a href="#" data-id="{id}" class="enWord tag" style="color: white">{word}</a>';
           line = line.replace('{id}', result.rows.item(x).id);
           line = line.replace('{word}', result.rows.item(x).pl_word);
           
