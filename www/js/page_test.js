@@ -11,8 +11,6 @@ var app = {
     
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
-        
-        alert(books[1][1][1].pl + '\n' + books[1][1][1].en);
     }, // onDeviceReady
 
     receivedEvent: function(id) {

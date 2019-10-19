@@ -1,3 +1,0 @@
-create table if not exists words( id integer primary key, gb_word text not null, us_word text default "", ph_word text default "", ir_word text default "", pl_word text not null, rate integer default 0, notes text default "", added text default "", unique(gb_word, pl_word) on conflict ignore)
-
-insert into words (gb_word, us_word, ph_word, ir_word, pl_word, notes, added) values ("bita", "kawalek", "", "", "", "notka2", "2019-01-01")
