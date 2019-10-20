@@ -1,17 +1,3 @@
-function createDB(tx){
-  var createSQL;
-  createSQL  = 'create table if not exists words(id integer primary key, gb_word text not null, us_word text default "", ph_word text default "", ir_word text default "", pl_word text not null, notes text default "",  rate integer default 0, added text default "", inpart integer default 0, unique(gb_word, pl_word) on conflict ignore)';
-  tx.executeSql(createSQL);
-  
-  createSQL  = 'create table if not exists parts (';
-  createSQL += 'id integer primary key,';
-  createSQL += 'part txt not null,';
-  createSQL += 'used integer default 0,';
-  createSQL += 'lastused text default ""';
-  createSQL += ');';
-  tx.executeSql(createSQL); 
-}
-
 function clearDB(tx){
   tx.executeSql("delete from words where 1");
   tx.executeSql("delete from parts where 1"); 

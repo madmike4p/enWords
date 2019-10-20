@@ -6,11 +6,13 @@ var app = {
 
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
-        countRecords("Total records in db: ?");
     }, // end bindEvents
     
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+        db.transaction(createDB, errorDB, successDB);
+        
+        countRecords("Total records in db: ?");
     }, // onDeviceReady
 
     dbMessage: function(msg) {

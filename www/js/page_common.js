@@ -2,6 +2,20 @@ function errorDB(err) { alert("Error processing SQL: "+ err.code + " " + err.mes
 function successDB() {}
 function errorFile(err) { alert("FileSystem Error: " + err); }
 
+function createDB(tx){
+  var createSQL;
+  createSQL  = 'create table if not exists words(id integer primary key, gb_word text not null, us_word text default "", ph_word text default "", ir_word text default "", pl_word text not null, notes text default "",  rate integer default 0, added text default "", inpart integer default 0, unique(gb_word, pl_word) on conflict ignore)';
+  tx.executeSql(createSQL);
+  
+  createSQL  = 'create table if not exists parts (';
+  createSQL += 'id integer primary key,';
+  createSQL += 'part txt not null,';
+  createSQL += 'used integer default 0,';
+  createSQL += 'lastused text default ""';
+  createSQL += ');';
+  tx.executeSql(createSQL); 
+}
+
 function countRecords (msg) {
   db.transaction(function(tx){
     tx.executeSql("select count(*) as myCount from words", [],function(tx1, result) {	 
