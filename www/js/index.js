@@ -1,7 +1,6 @@
 var app = {
   initialize: function() {
     this.bindEvents();
-    document.getElementById('button').addEventListener('click', this.onClick);
   }, // end initialize
 
   bindEvents: function() {
@@ -9,40 +8,37 @@ var app = {
   }, // end bindEvents
     
   onDeviceReady: function() {
+    console.log('---------------');
+
+    alert('dupa');
+
+  app.message('start', '');
+  app.getContent('https://pl.pons.com');
+  app.getContent('http://localhost');
+  app.getContent('http://127.0.0.1');
+  app.getContent('spec.html');
   }, // onDeviceReady
 
-  onClick: function(event) {
-    var container = document.getElementById('container');
-    var button = document.getElementById('button');
-    button.innerHTML = 'Pushed';
-    alert('pushed');
+  getContent: function(url) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        app.message(url, this.status);
+      }
+    };
+    xhttp.open("GET", 'https://google.com/', true);
+    xhttp.send();
+  },
 
+  message: function(url, msg) {
+    var ul = document.getElementById('container');
+    console.log(ul);
 
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      alert(this.status);
-      alert(this.statusText);
-      alert(this.responseText);
-    }
-  };
-  xhttp.open("GET", 'https://google.com/', true);
-  xhttp.send();
+    var li = document.createElement('li');
+    var txt = document.createTextNode(url + ' -> ' + msg);
 
-  alert('break');
-
-
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      alert(this.status);
-      alert(this.statusText);
-      alert(this.responseText);
-    }
-  };
-  xhttp.open("GET", 'spec.html', true);
-  xhttp.send();
-
+    li.appendChild(txt);
+    ul.appendChild(li);
   },
 
   dbMessage: function(msg) {
