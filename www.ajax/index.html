@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<!-- nie czyta pliku i www
+<meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' gap:; style-src 'self' 'unsafe-inline'; media-src *" />
+<meta http-equiv="Content-Security-Policy" content="default-src *; connect-src *; style-src 'self' 'unsafe-inline'; media-src *">
+-->
+
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https://*" />
+<link rel="stylesheet" type="text/css" href="css/index.css" />
+</head>
+</body>
+?
+<ul id="container">
+</ul>
+
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript">
+app.initialize();
+</script>
+</body>
+</html>
