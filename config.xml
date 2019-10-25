@@ -8,13 +8,13 @@
         Michael
     </author>
     <content src="index.html" />
-    <uses-permission android:name="android.permission.INTERNET" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="14" />
     <preference name="Orientation" value="landscape" />
     <preference name="fullscreen" value="true" />
     <plugin name="cordova-plugin-inappbrowser" source="npm" spec="~1.7.1" />
     <plugin name="cordova-plugin-file" source="npm" spec="~4.3.3" />
+    <plugin name="cordova-plugin-network-information" source="npm" spec="~1.3.3" />
     <platform name="android">
         <icon density="ldpi" src="www/res/icon/android/drawable-ldpi-icon.png" />
         <icon density="mdpi" src="www/res/icon/android/drawable-mdpi-icon.png" />
