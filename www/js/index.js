@@ -8,9 +8,6 @@ var app = {
   }, // end bindEvents
     
   onDeviceReady: function() {
-    console.log('---------------');
-
-    alert('dupa');
 
   app.message('start', '');
   app.getContent('https://pl.pons.com');
