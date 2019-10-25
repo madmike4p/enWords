@@ -19,24 +19,30 @@ var app = {
 
 
   var xhttp = new XMLHttpRequest();
-
   xhttp.onreadystatechange = function() {
-
     if (this.readyState == 4 && this.status == 200) {
-
       alert(this.status);
-
       alert(this.statusText);
-
       alert(this.responseText);
-
     }
-
   };
-
   xhttp.open("GET", 'https://google.com/', true);
-
   xhttp.send();
+
+  alert('break');
+
+
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      alert(this.status);
+      alert(this.statusText);
+      alert(this.responseText);
+    }
+  };
+  xhttp.open("GET", 'spec.html', true);
+  xhttp.send();
+
   },
 
   dbMessage: function(msg) {
